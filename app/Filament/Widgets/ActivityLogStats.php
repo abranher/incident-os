@@ -2,10 +2,10 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\ActivityLog;
 use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Spatie\Activitylog\Models\Activity;
 
 class ActivityLogStats extends StatsOverviewWidget
 {
@@ -15,7 +15,7 @@ class ActivityLogStats extends StatsOverviewWidget
 
   protected function getStats(): array
   {
-    $stats = Activity::query()
+    $stats = ActivityLog::query()
       ->whereDate('created_at', now())
       ->selectRaw('count(*) as total_actions')
       ->selectRaw('count(distinct causer_id) as total_users')

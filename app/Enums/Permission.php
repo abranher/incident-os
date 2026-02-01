@@ -25,5 +25,9 @@ enum Permission: string
   // PERMISSIONS
   case VIEW_ANY_PERMISSION = 'view_any_permission';
   case VIEW_PERMISSION     = 'view_permission';
+
+  // ACTIVITY LOGS
+  case VIEW_ANY_ACTIVITY_LOG = 'view_any_activity_log';
+  case VIEW_ACTIVITY_LOG     = 'view_activity_log';
 }
 

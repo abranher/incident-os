@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Role;
-use App\Models\User;
 use App\Enums\Permission as PermissionEnum;
 use App\Enums\Role as RoleEnum;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class RolePolicy
