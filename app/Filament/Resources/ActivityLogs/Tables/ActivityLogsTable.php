@@ -15,9 +15,8 @@ class ActivityLogsTable
       ->columns([
         TextColumn::make('created_at')
           ->label('Fecha')
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas')
-          ->sortable(),
+          ->sortable()
+          ->date('d/m/Y - g:i A'),
         TextColumn::make('log_name')
           ->label('Módulo')
           ->badge()

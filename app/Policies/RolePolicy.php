@@ -3,21 +3,12 @@
 namespace App\Policies;
 
 use App\Enums\Permission as PermissionEnum;
-use App\Enums\Role as RoleEnum;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class RolePolicy
 {
-  /**
-   * Determine if the role is Super admin.
-   */
-  private function isProtectedRole(Role $role): bool
-  {
-    return $role->name === RoleEnum::SUPER_ADMIN->value;
-  }
-
   /**
    * Determine whether the user can view any models.
    */
@@ -39,7 +30,7 @@ class RolePolicy
    */
   public function create(User $user): bool
   {
-    return $user->hasPermissionTo(PermissionEnum::CREATE_ROLE->value);
+    return false;
   }
 
   /**
@@ -47,9 +38,7 @@ class RolePolicy
    */
   public function update(User $user, Role $role): bool
   {
-    if ($this->isProtectedRole($role)) return false;
-
-    return $user->hasPermissionTo(PermissionEnum::UPDATE_ROLE->value);
+    return false;
   }
 
   /**
@@ -57,9 +46,7 @@ class RolePolicy
    */
   public function delete(User $user, Role $role): bool
   {
-    if ($this->isProtectedRole($role)) return false;
-
-    return $user->hasPermissionTo(PermissionEnum::DELETE_ROLE->value);
+    return false;
   }
 
   /**
@@ -67,9 +54,7 @@ class RolePolicy
    */
   public function restore(User $user, Role $role): bool
   {
-    if ($this->isProtectedRole($role)) return false;
-
-    return $user->hasPermissionTo(PermissionEnum::RESTORE_ROLE->value);
+    return false;
   }
 
   /**
@@ -77,9 +62,7 @@ class RolePolicy
    */
   public function forceDelete(User $user, Role $role): bool
   {
-    if ($this->isProtectedRole($role)) return false;
-
-    return $user->hasPermissionTo(PermissionEnum::FORCE_DELETE_ROLE->value);
+    return false;
   }
 }
 

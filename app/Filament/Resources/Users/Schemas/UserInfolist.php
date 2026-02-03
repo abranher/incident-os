@@ -19,21 +19,18 @@ class UserInfolist
         TextEntry::make('email_verified_at')
           ->label('Email verificado')
           ->placeholder('Sin verificar')
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas'),
+          ->date('d/m/Y - g:i A'),
         TextEntry::make('created_at')
           ->label('Fecha de registro')
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas'),
+          ->date('d/m/Y - g:i A'),
         TextEntry::make('updated_at')
           ->label('Última actualización')
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas'),
+          ->date('d/m/Y - g:i A'),
         TextEntry::make('deleted_at')
           ->label('Fecha de baja')
           ->visible(fn (User $record): bool => $record->trashed())
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas'),
+          ->date('d/m/Y - g:i A'),
       ]);
   }
 }
+

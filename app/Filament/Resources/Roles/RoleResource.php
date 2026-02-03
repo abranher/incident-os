@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Roles;
 
-use App\Filament\Resources\Roles\Pages\CreateRole;
-use App\Filament\Resources\Roles\Pages\EditRole;
+use App\Enums\Role as RoleEnum;
 use App\Filament\Resources\Roles\Pages\ListRoles;
-use App\Filament\Resources\Roles\Schemas\RoleForm;
+use App\Filament\Resources\Roles\Pages\ViewRole;
+use App\Filament\Resources\Roles\Schemas\RoleInfolist;
 use App\Filament\Resources\Roles\Tables\RolesTable;
 use App\Models\Role;
 use BackedEnum;
@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class RoleResource extends Resource
 {
@@ -26,9 +27,14 @@ class RoleResource extends Resource
 
   protected static ?string $pluralModelLabel = 'roles';
 
-  public static function form(Schema $schema): Schema
+  public static function getRecordTitle(?Model $record): ?string
   {
-    return RoleForm::configure($schema);
+    return RoleEnum::tryFrom($record->name)?->getLabel() ?? $record->name;
+  }
+
+  public static function infolist(Schema $schema): Schema
+  {
+    return RoleInfolist::configure($schema);
   }
 
   public static function table(Table $table): Table
@@ -47,8 +53,7 @@ class RoleResource extends Resource
   {
     return [
       'index' => ListRoles::route('/'),
-      'create' => CreateRole::route('/create'),
-      'edit' => EditRole::route('/{record}/edit'),
+      'view' => ViewRole::route('/{record}'),
     ];
   }
 }

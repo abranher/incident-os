@@ -28,27 +28,23 @@ class UsersTable
           ->label('Email verificado')
           ->sortable()
           ->placeholder('Sin verificar')
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas'),
+          ->date('d/m/Y - g:i A'),
         TextColumn::make('created_at')
           ->label('Fecha de registro')
           ->sortable()
           ->toggleable(isToggledHiddenByDefault: true)
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas'),
+          ->date('d/m/Y - g:i A'),
         TextColumn::make('updated_at')
           ->label('Última actualización')
           ->sortable()
           ->toggleable(isToggledHiddenByDefault: true)
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas'),
+          ->date('d/m/Y - g:i A'),
         TextColumn::make('deleted_at')
           ->label('Fecha de baja')
           ->sortable()
           ->placeholder('Activo')
           ->toggleable(isToggledHiddenByDefault: true)
-          ->date('d/m/Y - g:i A')
-          ->timezone('America/Caracas'),
+          ->date('d/m/Y - g:i A'),
       ])
       ->filters([
         TrashedFilter::make(),

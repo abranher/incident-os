@@ -31,8 +31,7 @@ class ActivityLogInfolist
               ->default('Sistema'),
             TextEntry::make('created_at')
               ->label('Fecha')
-              ->date('d/m/Y - g:i A')
-              ->timezone('America/Caracas'),
+              ->date('d/m/Y - g:i A'),
           ])
           ->columns(3)
           ->columnSpanFull(),
