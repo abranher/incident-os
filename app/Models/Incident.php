@@ -59,7 +59,7 @@ class Incident extends Model
   public function moderators(): BelongsToMany
   {
     return $this->belongsToMany(User::class, 'incident_user')
-              ->withPivot('assigned_at');
+             ->withPivot('assigned_at');
   }
 }
 

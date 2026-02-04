@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Enums\Role;
 use App\Models\User;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
@@ -16,6 +17,12 @@ class UserInfolist
           ->label('Nombre'),
         TextEntry::make('email')
           ->label('Correo electrónico'),
+        TextEntry::make('roles.name')
+          ->label('Rol')
+          ->badge()
+          ->formatStateUsing(fn (string $state): string => Role::tryFrom($state)?->getLabel() ?? $state)
+          ->color(fn (string $state): string => Role::tryFrom($state)?->getColor() ?? 'gray')
+          ->icon(fn (string $state): string => Role::tryFrom($state)?->getIcon() ?? 'heroicon-m-user'),
         TextEntry::make('email_verified_at')
           ->label('Email verificado')
           ->placeholder('Sin verificar')

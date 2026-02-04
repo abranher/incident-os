@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Department;
+use App\Models\Incident;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -8,6 +10,8 @@ if (!function_exists('model_to_spanish')) {
   function model_to_spanish(string $model, $plural = false)
   {
     $spanish = match ($model) {
+      Department::class => 'Departamento',
+      Incident::class => 'Incidencia',
       Permission::class => 'Permiso',
       Role::class => 'Rol',
       User::class => 'Usuario',

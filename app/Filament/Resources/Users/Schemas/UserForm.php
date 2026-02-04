@@ -2,9 +2,13 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Enums\Role as RoleEnum;
+use App\Models\Role;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Support\Enums\Operation;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Model;
 
 class UserForm
 {
@@ -33,6 +37,15 @@ class UserForm
           ->required()
           ->revealable()
           ->hiddenOn(Operation::Edit),
+        Select::make('roles')
+          ->label('Rol')
+          ->relationship('roles', 'name')
+          ->preload()
+          ->searchable()
+          ->getOptionLabelFromRecordUsing(fn (Model $record) =>
+            RoleEnum::tryFrom($record->name)?->getLabel() ?? $record->name
+          ),
       ]);
   }
 }
+
