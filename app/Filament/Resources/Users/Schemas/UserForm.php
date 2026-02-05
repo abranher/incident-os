@@ -21,9 +21,11 @@ class UserForm
       ->components([
         TextInput::make('name')
           ->label('Nombre')
+          ->placeholder('Ej: Juan Pérez')
           ->required(),
         TextInput::make('email')
           ->label('Correo electrónico')
+          ->placeholder('Ej: ejemplo@dominio.com')
           ->unique()
           ->email()
           ->required(),
@@ -51,19 +53,6 @@ class UserForm
                 'unique' => 'Este número de documento ya existe en el sistema.',
               ]),
           ]),
-        TextInput::make('password')
-          ->label('Contraseña')
-          ->password()
-          ->rule('confirmed')
-          ->required()
-          ->revealable()
-          ->hiddenOn(Operation::Edit),
-        TextInput::make('password_confirmation')
-          ->label('Confirmar contraseña')
-          ->password()
-          ->required()
-          ->revealable()
-          ->hiddenOn(Operation::Edit),
         Select::make('roles')
           ->label('Rol')
           ->relationship('roles', 'name')
@@ -71,7 +60,23 @@ class UserForm
           ->searchable()
           ->getOptionLabelFromRecordUsing(fn (Model $record) =>
             RoleEnum::tryFrom($record->name)?->getLabel() ?? $record->name
-          ),
+          )
+          ->hiddenOn(Operation::Edit),
+        TextInput::make('password')
+          ->label('Contraseña')
+          ->placeholder('Mínimo 8 caracteres')
+          ->password()
+          ->rule('confirmed')
+          ->required()
+          ->revealable()
+          ->hiddenOn(Operation::Edit),
+        TextInput::make('password_confirmation')
+          ->label('Confirmar contraseña')
+          ->placeholder('Repita la contraseña anterior')
+          ->password()
+          ->required()
+          ->revealable()
+          ->hiddenOn(Operation::Edit),
       ]);
   }
 }
