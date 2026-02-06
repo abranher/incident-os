@@ -22,9 +22,11 @@ class IncidentInfolist
               ->label('Departamento'),
             TextEntry::make('created_at')
               ->label('Fecha Reporte'),
-            TextEntry::make('status')
+              TextEntry::make('status')
+              ->label('Estatus')
               ->badge(),
             TextEntry::make('priority')
+              ->label('Prioridad')
               ->badge(),
           ])
           ->columns(2),
