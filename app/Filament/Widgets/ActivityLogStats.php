@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Enums\Permission as PermissionEnum;
 use App\Models\ActivityLog;
 use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget;
@@ -12,6 +13,12 @@ class ActivityLogStats extends StatsOverviewWidget
   protected ?string $heading = 'Métricas de la Bitácora';
 
   protected array|int|null $columns = 2;
+
+  public static function canView(): bool
+  {
+    $user = auth()->user();
+    return $user->hasPermissionTo(PermissionEnum::VIEW_ACTIVITY_LOG->value);
+  }
 
   protected function getStats(): array
   {
