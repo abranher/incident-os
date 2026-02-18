@@ -12,6 +12,10 @@ class LatestActivityLogs extends TableWidget
 {
   protected static ?string $heading = 'Actividad reciente';
 
+  protected int|string|array $columnSpan = 'full';
+
+  protected static ?int $sort = 3;
+
   public function table(Table $table): Table
   {
     return $table
