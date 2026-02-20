@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Widgets\Moderator;
 
 use App\Enums\IncidentStatus;
 use App\Enums\Role as RoleEnum;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Widgets\Admin;
 
 use App\Enums\Permission as PermissionEnum;
 use App\Models\ActivityLog;
@@ -26,7 +26,12 @@ class LatestActivityLogs extends TableWidget
   public function table(Table $table): Table
   {
     return $table
-      ->query(fn (): Builder => ActivityLog::query()->with(['causer'])->latest()->limit(5))
+      ->query(fn (): Builder =>
+        ActivityLog::query()
+          ->with(['causer'])
+          ->latest()
+          ->limit(5)
+      )
       ->columns([
         TextColumn::make('created_at')
           ->label('Fecha')

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Widgets\Employee;
 
 use App\Enums\IncidentStatus;
 use App\Enums\Role as RoleEnum;
@@ -9,7 +9,7 @@ use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\Auth;
 
-class EmployeeIncidentStats extends StatsOverviewWidget
+class IncidentStats extends StatsOverviewWidget
 {
   protected ?string $heading = 'Seguimiento de mis Incidencias';
 

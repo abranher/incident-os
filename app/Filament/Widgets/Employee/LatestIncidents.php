@@ -1,27 +1,36 @@
 <?php
 
-namespace App\Filament\Resources\Incidents\Tables;
+namespace App\Filament\Widgets\Employee;
 
 use App\Enums\IncidentPriority;
 use App\Enums\IncidentStatus;
 use App\Enums\Role as RoleEnum;
-use Filament\Actions\ActionGroup;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\RestoreBulkAction;
-use Filament\Actions\ViewAction;
+use App\Models\Incident;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Filament\Widgets\TableWidget;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-class IncidentsTable
+class LatestIncidents extends TableWidget
 {
-  public static function configure(Table $table): Table
+  protected static ?string $heading = 'Mis Últimas Incidencias';
+
+  public static function canView(): bool
+  {
+    return Auth::user()->hasRole(RoleEnum::EMPLOYEE->value);
+  }
+
+  public function table(Table $table): Table
   {
     return $table
+      ->query(fn (): Builder =>
+        Incident::query()
+          ->where('user_id', Auth::id())
+          ->latest()
+          ->limit(5)
+      )
       ->columns([
         TextColumn::make('title')
           ->label('Título')
@@ -30,23 +39,16 @@ class IncidentsTable
         TextColumn::make('status')
           ->badge()
           ->sortable(),
-        TextColumn::make('priority')
-          ->label('Prioridad')
-          ->badge()
-          ->sortable(),
         TextColumn::make('department.name')
           ->label('Departamento')
           ->sortable()
           ->toggleable(),
-        TextColumn::make('reporter.name')
-          ->label('Reportado por')
-          ->toggleable()
-          ->hidden(fn () => Auth::user()->hasRole(RoleEnum::EMPLOYEE->value)),
         TextColumn::make('created_at')
           ->label('Fecha')
           ->date('d/m/Y - g:i A')
           ->sortable(),
       ])
+      ->paginated(false)
       ->filters([
         SelectFilter::make('status')
           ->options(IncidentStatus::class)
@@ -54,19 +56,13 @@ class IncidentsTable
         SelectFilter::make('priority')
           ->options(IncidentPriority::class)
           ->label('Prioridad'),
-        TrashedFilter::make(),
+      ])
+      ->headerActions([
+        //
       ])
       ->recordActions([
-        ActionGroup::make([
-          ViewAction::make(),
-          EditAction::make(),
-        ])
-      ])
-      ->toolbarActions([
-        BulkActionGroup::make([
-          DeleteBulkAction::make(),
-          RestoreBulkAction::make(),
-        ]),
+        //
       ]);
   }
 }
+

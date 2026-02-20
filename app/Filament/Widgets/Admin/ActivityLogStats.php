@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Widgets\Admin;
 
 use App\Enums\Permission as PermissionEnum;
 use App\Models\ActivityLog;

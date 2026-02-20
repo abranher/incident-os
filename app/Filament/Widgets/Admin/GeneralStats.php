@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Widgets\Admin;
 
 use App\Enums\IncidentStatus;
 use App\Enums\Role as RoleEnum;
